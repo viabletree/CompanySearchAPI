@@ -9,4 +9,5 @@ class Sic_code extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $hidden = ['id', 'CompanyNumber'];
 }

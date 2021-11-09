@@ -10,4 +10,5 @@ class Returns extends Model
     use HasFactory;
     protected $table = "returns";
     public $timestamps = false;
+    protected $hidden = ['id', 'CompanyNumber'];
 }
