@@ -19,7 +19,7 @@ class CompanyController extends Controller
     public $successStatus = 200;
     function get_companies(Request $request)
     {
-        //$this->add_company_data($filename = '', $delimiter = ',');
+        $this->add_company_data($filename = '', $delimiter = ',');
         $companies = Company::searchCompanies($request);
         if ($companies->count()) {
 
