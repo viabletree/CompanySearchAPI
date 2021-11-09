@@ -22,6 +22,7 @@ class CompanyController extends Controller
         // $this->add_company_data($filename = '', $delimiter = ',');
         $companies = Company::searchCompanies($request);
         if ($companies->count()) {
+            // dd($companies[0]->reg_addresses);
 
             if (isset($request->filterBy) && $request->filterBy == 'count') {
                 $data['count'] = $companies->count();
