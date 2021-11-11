@@ -106,6 +106,7 @@ class Company extends Model
         }
 
         if (isset($params['filterBy']) && $params['filterBy'] == 'count') {
+
             $matches = $query->orderBy('id', 'DESC')->count();
         } else {
             if (isset($params['skip']) && isset($params['limit'])) {

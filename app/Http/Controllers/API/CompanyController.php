@@ -24,15 +24,17 @@ class CompanyController extends Controller
         //$this->add_company_data($filename = '', $delimiter = ',');
 
         $companies = Company::searchCompanies($request);
-        if ($companies->count()) {
+        if ($companies) {
             // dd($companies[0]->reg_addresses);
 
             if (isset($request->filterBy) && $request->filterBy == 'count') {
+                $count = $companies;
                 $data['count'] = $companies;
             } else {
+                $count = $companies->count();
                 $data['companies'] = $companies;
             }
-            $response = response()->json(CustomResponse::make_response(true, __('found successfully', ['total' => $companies->count()]), $data), $this->successStatus);
+            $response = response()->json(CustomResponse::make_response(true, __('found successfully', ['total' => $count]), $data), $this->successStatus);
         } else {
             $response = response()->json(CustomResponse::make_response(false, __('not found')), $this->successStatus);
         }

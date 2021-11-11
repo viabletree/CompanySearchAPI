@@ -3,7 +3,8 @@ ini_set('max_execution_time', 60 * 3 * 60); //3 minutes
 $data = csv_to_array();
 function csv_to_array()
 {
-    $file = fopen(public_path('/BasicCompanyData-2021-11-01-part1_6.csv'), 'r');
+    //$file = fopen(public_path('/BasicCompanyData-2021-11-01-part1_6.csv'), 'r');
+    $file = fopen(public_path('/abc.csv'), 'r');
     $i = 1;
     $first_line = "";
     $data = [];
