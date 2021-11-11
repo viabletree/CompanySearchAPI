@@ -15,6 +15,7 @@ class CreateReturnsTable extends Migration
     {
         Schema::create('returns', function (Blueprint $table) {
             $table->id();
+            $table->integer('CompanyID');
             $table->string('CompanyNumber');
             $table->string('NextDueDate');
             $table->string('LastMadeUpDate');

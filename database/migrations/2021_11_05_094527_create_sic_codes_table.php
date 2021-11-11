@@ -15,6 +15,7 @@ class CreateSicCodesTable extends Migration
     {
         Schema::create('sic_codes', function (Blueprint $table) {
             $table->id();
+            $table->integer('CompanyID');
             $table->string('CompanyNumber');
             $table->string('SicText_1');
             $table->string('SicText_2');

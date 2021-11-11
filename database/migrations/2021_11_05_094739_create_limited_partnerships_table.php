@@ -15,6 +15,7 @@ class CreateLimitedPartnershipsTable extends Migration
     {
         Schema::create('limited_partnerships', function (Blueprint $table) {
             $table->id();
+            $table->integer('CompanyID');
             $table->string('CompanyNumber');
             $table->string('NumGenPartners');
             $table->string('NumLimPartners');

@@ -11,38 +11,43 @@ class Company extends Model
     protected $hidden = ['id', 'created_at', 'updated_at'];
     public function LimitedPartnerships()
     {
-        return $this->hasMany(Limited_partnership::class, 'CompanyNumber', 'CompanyNumber');
+        return $this->hasMany(Limited_partnership::class, 'CompanyID', 'id');
     }
     public function Mortgages()
     {
-        return $this->hasMany(Mortgage::class, 'CompanyNumber', 'CompanyNumber');
+        return $this->hasMany(Mortgage::class, 'CompanyID', 'id');
     }
     public function previous_names()
     {
-        return $this->hasMany(Previous_name::class, 'CompanyNumber', 'CompanyNumber');
+        return $this->hasMany(Previous_name::class, 'CompanyID', 'id');
     }
     public function RegAddress()
     {
-        return $this->hasMany(Reg_address::class, 'CompanyNumber', 'CompanyNumber');
+        return $this->hasMany(Reg_address::class, 'CompanyID', 'id');
     }
     public function Returns()
     {
-        return $this->hasMany(Returns::class, 'CompanyNumber', 'CompanyNumber');
+        return $this->hasMany(Returns::class, 'CompanyID', 'id');
     }
     public function SICCode()
     {
-        return $this->hasMany(Sic_code::class, 'CompanyNumber', 'CompanyNumber');
+        return $this->hasMany(Sic_code::class, 'CompanyID', 'id');
+    }
+    public function Accounts()
+    {
+        return $this->hasMany(Account::class, 'CompanyID', 'id');
     }
     static function searchCompanies($request)
     {
         $params = $request->all();
 
-        $query = static::select()->with(['RegAddress', 'SICCode', 'LimitedPartnerships', 'Mortgages', 'Returns']);
+        $query = static::select()->with(['Accounts', 'RegAddress', 'SICCode', 'LimitedPartnerships', 'Mortgages', 'Returns']);
         // if (isset($params['companyNumber'])) {
         // }
         // if (isset($params['companyName'])) {
         //     $query->where('companyName', $params['companyName']);
         // }
+
         switch ($params) {
             case isset($params['CompanyNumber']): {
                     $query->where('CompanyNumber', $params['CompanyNumber']);
@@ -99,7 +104,17 @@ class Company extends Model
                     break;
                 }
         }
-        $matches = $query->orderBy('id', 'DESC')->get();
+
+        if (isset($params['filterBy']) && $params['filterBy'] == 'count') {
+            $matches = $query->orderBy('id', 'DESC')->count();
+        } else {
+            if (isset($params['skip']) && isset($params['limit'])) {
+
+                $matches = $query->orderBy('id', 'DESC')->skip(0)->take(10)->get();
+            } else {
+                $matches = $query->orderBy('id', 'DESC')->get();
+            }
+        }
         return $matches;
     }
 }

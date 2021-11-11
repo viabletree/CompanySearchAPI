@@ -15,6 +15,7 @@ class CreatePreviousNamesTable extends Migration
     {
         Schema::create('previous_names', function (Blueprint $table) {
             $table->id();
+            $table->integer('CompanyID');
             $table->string('CompanyNumber');
             $table->string('key');
             $table->string('CONDATE');

@@ -15,6 +15,7 @@ class CreateRegAddressesTable extends Migration
     {
         Schema::create('reg_addresses', function (Blueprint $table) {
             $table->id();
+            $table->integer('CompanyID');
             $table->string('CompanyNumber');
             $table->string('CareOf');
             $table->string('POBox');
