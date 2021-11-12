@@ -1,5 +1,6 @@
 <?php
-ini_set('max_execution_time', 60 * 3 * 60); //3 minutes
+ini_set('max_execution_time', 60 * 3 * 60); //3 hours
+ini_set('memory_limit', '-1');
 
 $data = csv_to_array($filename);
 function csv_to_array($filename)
