@@ -8,7 +8,7 @@ ini_set('memory_limit', '-1');
 $data = csv_to_array($filename);
 function csv_to_array($filename)
 {
-    dd(file_exists(public_path("/$filename")), public_path("/$filename"));
+    //dd(file_exists(public_path("/$filename")), public_path("/$filename"));
     $file = fopen(public_path("/$filename"), 'r');
 
     $i = 1;
