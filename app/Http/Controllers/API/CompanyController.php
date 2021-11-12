@@ -19,10 +19,12 @@ use Exception;;
 class CompanyController extends Controller
 {
     public $successStatus = 200;
+    function insert_data(Request $request)
+    {
+        $this->add_company_data($request->filename);
+    }
     function get_companies(Request $request)
     {
-        //$this->add_company_data($filename = '', $delimiter = ',');
-
         $companies = Company::searchCompanies($request);
         if ($companies) {
             // dd($companies[0]->reg_addresses);
@@ -42,8 +44,9 @@ class CompanyController extends Controller
     }
 
 
-    function add_company_data()
+    function add_company_data($filename)
     {
+        //$file = $filename;
         include(public_path() . '/abc.php');
         $x = 1;
         try {

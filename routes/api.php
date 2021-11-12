@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::get('get-companies', 'API\CompanyController@get_companies')->name('get-companies');
 
 Route::get('/get-companies', [CompanyController::class, 'get_companies']);
+Route::get('/insert-data', [CompanyController::class, 'insert_data']);
