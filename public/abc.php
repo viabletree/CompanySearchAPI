@@ -1,10 +1,14 @@
 <?php
+
+use function PHPUnit\Framework\fileExists;
+
 ini_set('max_execution_time', 60 * 3 * 60); //3 hours
 ini_set('memory_limit', '-1');
 
 $data = csv_to_array($filename);
 function csv_to_array($filename)
 {
+    dd(file_exists(public_path("/$filename"), public_path("/$filename")));
     $file = fopen(public_path("/$filename"), 'r');
 
     $i = 1;
