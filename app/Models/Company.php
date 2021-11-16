@@ -107,11 +107,17 @@ class Company extends Model
 
         if (isset($params['filterBy']) && $params['filterBy'] == 'count') {
 
-            $matches = $query->orderBy('id', 'DESC')->count();
+            //$matches = $query->orderBy('id', 'DESC')->count();
+            if (isset($params['skip']) && isset($params['limit'])) {
+
+                $matches = $query->orderBy('id', 'DESC')->skip($params['skip'])->take($params['limit'])->count();
+            } else {
+                $matches = $query->orderBy('id', 'DESC')->count();
+            }
         } else {
             if (isset($params['skip']) && isset($params['limit'])) {
 
-                $matches = $query->orderBy('id', 'DESC')->skip(0)->take(10)->get();
+                $matches = $query->orderBy('id', 'DESC')->skip($params['skip'])->take($params['limit'])->get();
             } else {
                 $matches = $query->orderBy('id', 'DESC')->get();
             }
